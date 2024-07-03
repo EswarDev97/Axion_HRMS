@@ -16162,19 +16162,19 @@ html body .wrapper {
 html body .wrapper #sidebar {
   min-width: 300px;
   max-width: 300px;
-  background: #7386d5;
+  background: #177385;
   color: white;
   transition: all 0.3s;
 }
 html body .wrapper #sidebar .nav-active {
-  background: #6577bd;
+  background: #177385;
 }
 html body .wrapper #sidebar i {
   width: 15px !important;
 }
 html body .wrapper #sidebar .sidebar-header {
   padding: 20px;
-  background: #6d7fcc;
+  background: #177385;
 }
 html body .wrapper #sidebar ul .components {
   padding: 20px 0;
@@ -16197,7 +16197,7 @@ html body .wrapper #sidebar ul li a:hover {
 html body .wrapper #sidebar ul li .active > a,
 html body .wrapper #sidebar a[aria-expanded=true] {
   color: #fff;
-  background: #6d7fcc;
+  background: #177385;
 }
 html body .toggleSidebar {
   margin-left: -300px;
@@ -16215,7 +16215,7 @@ html body .dropdown-toggle::after {
 html body ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #6d7fcc;
+  background: #177385;
 }
 html body .content {
   width: 100%;
@@ -16223,7 +16223,7 @@ html body .content {
   transition: all 0.3s;
 }
 html body .toggleSidebarButton {
-  background: #7385d5 !important;
+  background:  #177385 !important;
   transition: all 0.3s;
 }
 html body .toggleSidebarButton:hover {

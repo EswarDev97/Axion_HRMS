@@ -83,29 +83,73 @@
         <div class="row">
             <div class="col-12 mb-3">
                 <div class="bg-light text-dark p-3 card scrollable">
-                    <h3>Announcements</h3>
-                    <table class="table table-light table-striped table-hover table-bordered text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="table-dark">#</th>
-                                <th scope="col" class="table-dark">Name</th>
-                                <th scope="col" class="table-dark">Created By</th>
-                                <th scope="col" class="table-dark">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($announcements as $announcement)
-                                <tr>
-                                    <th scope="row">{{ $loop->iteration + $announcements->firstItem() - 1 }}</th>
-                                    <td><a
-                                            href="{{ route('announcements.show', ['announcement' => $announcement->id]) }}">{{ $announcement->title }}</a>
-                                    </td>
-                                    <td>{{ optional($announcement->creator)->name }}</td>
-                                    <td>{{ $announcement->created_at }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <h3>TASKS</h3>
+                    <div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Tasks Assigned to Me</h3>
+            <table class="table table-light table-striped table-hover table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-dark">ID</th>
+                        <th scope="col" class="table-dark">Project</th>
+                        <th scope="col" class="table-dark">Task Name</th>
+                        <th scope="col" class="table-dark">Priority</th>
+                        <th scope="col" class="table-dark">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($assignedTasks as $task)
+                    <tr>
+                        <td>{{ $task->id }}</td>
+                        <td>{{ $task->project->name }}</td>
+                        <td>{{ $task->name }}</td>
+                        <td>{{ $task->priority }}</td>
+                        <td>{{ $task->status }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+        <h3>Tasks Created by Me</h3>
+            
+            <table class="table table-light table-striped table-hover table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-dark">ID</th>
+                        <th scope="col" class="table-dark">Project</th>
+                        <th scope="col" class="table-dark">Task Name</th>
+                        <th scope="col" class="table-dark">Priority</th>
+                        <th scope="col" class="table-dark">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($createdTasks as $task)
+                        <tr>
+                            <td>{{ $task->id }}</td>
+                            <td>{{ $task->project->name }}</td>
+                            <td>{{ $task->name }}</td>
+                            <td>{{ $task->priority }}</td>
+                            <td>{{ $task->status }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+</div>
 
                     {{ $announcements->links() }}
                 </div>

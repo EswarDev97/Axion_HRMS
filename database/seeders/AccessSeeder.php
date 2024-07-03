@@ -29,3 +29,5 @@ class AccessSeeder extends Seeder
         Admin::create(['role_id' => $adminId]);
     }
 }
+
+

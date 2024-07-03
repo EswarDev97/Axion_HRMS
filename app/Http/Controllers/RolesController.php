@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\Log;
 use App\Models\Menu;
 use App\Models\Role;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -156,5 +157,10 @@ class RolesController extends Controller
     {
         $roles = $this->roles->all();
         return view('pages.roles_print', compact('roles'));
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 }

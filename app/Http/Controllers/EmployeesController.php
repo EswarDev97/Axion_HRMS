@@ -48,10 +48,11 @@ class EmployeesController extends Controller
         $roles = resolve(Role::class)->get();
         $departments = resolve(Department::class)->get();
         $positions = resolve(Position::class)->get();
-
-        return view('pages.employees-data_create', compact('roles', 'departments', 'positions'));
+      
+               $employees = Employee::all(); 
+        return view('pages.employees-data_create', compact('roles', 'departments', 'positions', 'employees'));
     }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -72,8 +73,13 @@ class EmployeesController extends Controller
             'name' => $request->input('name'),
             'start_of_contract' => $request->input('start_of_contract'),
             'end_of_contract' => $request->input('end_of_contract'),
+            'manager_id' => $request->input('manager_id'),
             'department_id' => $request->input('department_id'),
             'position_id' => $request->input('position_id'),
+            'blood_group' => $request->input('blood_group'), // Added blood_group field
+            'emergency_contact_number' => $request->input('emergency_contact_number'), // Added emergency_contact_number field
+            'basic_salary' => $request->input('basic_salary'),
+            'variable_pay' => $request->input('variable_pay'),
         ]);
 
         EmployeeDetail::create([
@@ -124,11 +130,11 @@ class EmployeesController extends Controller
      */
     public function edit(Employee $employee)
     {
-        $roles = resolve(Role::class)->get();
-        $departments = resolve(Department::class)->get();
-        $positions = resolve(Position::class)->get();
-
-        return view('pages.employees-data_edit', compact('employee', 'roles', 'departments', 'positions'));
+        $roles = Role::all();
+        $departments = Department::all();
+        $positions = Position::all();
+        $employees = Employee::all(); 
+        return view('pages.employees-data_edit', compact('employees','employee', 'roles', 'departments', 'positions'));
     }
 
     /**
@@ -156,6 +162,11 @@ class EmployeesController extends Controller
                     'end_of_contract' => $request->input('end_of_contract'),
                     'department_id' => $request->input('department_id'),
                     'position_id' => $request->input('position_id'),
+                    'manager_id' => $request->input('manager_id'),
+                    'basic_salary' => $request->input('basic_salary'),
+                    'variable_pay' => $request->input('variable_pay'),
+                    'blood_group' => $request->input('blood_group'), // Updated blood_group field
+                    'emergency_contact_number' => $request->input('emergency_contact_number'), // Updated emergency_contact_number field
                     'is_active' => $request->input('is_active'),
                 ]);
 
@@ -199,7 +210,8 @@ class EmployeesController extends Controller
         return redirect()->route('employees-data')->with('status', 'Successfully deleted an employee.');
     }
 
-    public function print() {
+    public function print()
+    {
         $employees = Employee::all();
 
         return view('pages.employees-data_print', compact('employees'));

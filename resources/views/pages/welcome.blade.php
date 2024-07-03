@@ -10,8 +10,8 @@
     <div class="row hero">
         <div class="col-8 offset-1 d-flex align-items-center">
             <div>
-                <h1 class="text-white font-weight-bold text-capitalize">PT. Asta Satria Investama</h1>
-                <h4 class="text-white">Perusahaan yang bergerak di bidang pengembangan game.</h4>
+                <h1 class="text-white font-weight-bold text-capitalize">Axion Technical services </h1>
+                <h4 class="text-white"></h4>
             </div>
         </div>
     </div>

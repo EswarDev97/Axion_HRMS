@@ -19,6 +19,16 @@ use App\Http\Controllers\ScoreCategoriesController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\FinancialRequestController;
+use App\Http\Controllers\OrganizationController;
+
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -129,3 +139,11 @@ Route::middleware('check.access')->group(function() {
     Route::get('/profile', [ProfilesController::class, 'index'])->name('profile');
     Route::put('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');    
 });
+Route::resource('projects', ProjectController::class);
+Route::resource('tasks', TaskController::class);
+Route::resource('financial-requests', FinancialRequestController::class);
+
+Route::post('financial-requests/{financial_request}/update-status', [FinancialRequestController::class, 'updateStatus'])->name('financial-requests.update-status');
+
+Route::get('/organization', [OrganizationController::class, 'index'])->name('organization.index');;// Example route for organization tree view
+Route::get('/organization/tree', [OrganizationController::class, 'showTree'])->name('organization.tree');

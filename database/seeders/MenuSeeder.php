@@ -14,10 +14,10 @@ class MenuSeeder extends Seeder
      */
     public function run()
     {
-        $menus = ['dashboard', 'data', 'performance', 'leave-request', 'attendances', 'announcements', 'recruitments', 'score-category', 'logs',  'accounts', 'user'];
+        $menus = ['dashboard', 'data', 'performance', 'leave-request', 'attendances', 'announcements', 'recruitments', 'score-category', 'logs',  'accounts', 'user','tasks','financial-request'];
 
         foreach($menus as $menu) {
-            Menu::factory()->create(['name' => $menu]);
+            Menu::firstOrCreate(['name' => $menu]);
         }
     }
-}
+} 

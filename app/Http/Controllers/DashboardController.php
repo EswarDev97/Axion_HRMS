@@ -6,6 +6,7 @@ use App\Models\Announcement;
 use App\Models\Attendance;
 use App\Models\AttendanceTime;
 use App\Models\Employee;
+use App\Models\task;
 use App\Models\RecruitmentCandidate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,7 +42,11 @@ class DashboardController extends Controller
         $employeesCount = $this->employees->getCount();
         $recruitmentCandidatesCount = $this->recruitmentCandidates->getCount();
         $endingEmployees = $this->employees->getEndingContractEmployees();
+        $user = auth()->user();
+        $assignedTasks = Task::where('assignee_id', $user->id)->get();
+        $createdTasks = Task::where('resource_assigned_to', $user->id)->get();
 
+        return view('tasks.index', compact('assignedTasks', 'createdTasks'));
         $attendanceTimesId = AttendanceTime::whereIn("name", ["IN", "OUT"])
                                 ->get()
                                 ->map(function($item) {
@@ -53,6 +58,6 @@ class DashboardController extends Controller
                                 ->whereIn('attendance_time_id', $attendanceTimesId)
                                 ->exists();
 
-        return view('pages.dashboard', compact('announcements', 'employeesCount', 'recruitmentCandidatesCount', 'endingEmployees', 'checkForAttendance'));
+        return view('pages.dashboard', compact('announcements', 'employeesCount', 'recruitmentCandidatesCount', 'endingEmployees', 'checkForAttendance','assignedTasks','createdTasks'));
     }
 }

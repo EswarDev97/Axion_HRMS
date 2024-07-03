@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -96,5 +97,10 @@ class UsersController extends Controller
     {
         $users = User::with('role')->latest()->get();
         return view('pages.users_print', compact('users'));
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }
