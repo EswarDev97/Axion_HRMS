@@ -14,6 +14,7 @@ class FinancialRequestController extends Controller
     public function index()
     {
         $accesses = Access::all();
+  
         // $financialRequests = FinancialRequest::all(); // Adjust with your query as needed
         // return view('financial-requests.index', compact('financialRequests'));
         $financialRequests = FinancialRequest::with('approver')->get();

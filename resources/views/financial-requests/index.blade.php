@@ -6,9 +6,9 @@
         <div class="col-md-12">
             <h3>All Financial Requests</h3>
             @auth
-                @can('isAdmin', Auth::user())
+                @if (Auth::user()->isAdmin())
                     <a href="{{ route('financial-requests.create') }}" class="btn btn-primary mb-3">Create Request</a>
-                @endcan
+                @endif
             @endauth
             <table class="table table-light table-striped table-hover table-bordered text-center">
                 <thead>
@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     @foreach ($financialRequests as $request)
-                        <tr >
+                        <tr>
                             <td>{{ $request->id }}</td>
                             <td>{{ optional($request->requester)->name }}</td>
                             <td>{{ optional($request->approver)->name }}</td>
@@ -36,7 +36,7 @@
                             <td>{{ $request->amount }}</td>
                             <td>{{ $request->expected_date }}</td>
                             <td>
-                                @if (Auth::user()->position && in_array(Auth::user()->position->name, ['Managing Director', 'Cashier']))
+                                @if (Auth::user()->isAdmin())
                                     @if ($request->status == 'approved')
                                         <form action="{{ route('financial-requests.update-status', ['financial_request' => $request->id]) }}" method="POST" class="d-inline-block">
                                             @csrf

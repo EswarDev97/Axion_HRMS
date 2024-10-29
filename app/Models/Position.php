@@ -18,4 +18,9 @@ class Position extends Model
     public function paginate($count = 10) {
         return $this->latest()->paginate($count);
     }
+
+    public function users()
+{
+    return $this->hasMany(User::class);
+}
 }

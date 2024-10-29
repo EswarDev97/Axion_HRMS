@@ -20,10 +20,23 @@ class EmployeeLeaveRequest extends Model
     }
 
     public function paginate($count = 10) {
-        if(auth()->user()->isAdmin()) {
+        $user = auth()->user();
+        
+        if($user->isAdmin()) {
             return $this->with('employee', 'checkedBy')->latest()->paginate($count);
         } else {
-            return $this->with('employee', 'checkedBy')->where('employee_id', auth()->user()->employee->id)->latest()->paginate($count);
+            $employee = $user->employee;
+            
+            if ($employee) {
+                return $this->with('employee', 'checkedBy')
+                    ->where('employee_id', $employee->id)
+                    ->latest()
+                    ->paginate($count);
+            } else {
+                // Handle the case where the user does not have an associated employee
+                // You can return an empty paginator or handle this case differently as needed
+                return $this->with('employee', 'checkedBy')->latest()->paginate($count);
+            }
         }
     }
 }

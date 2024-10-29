@@ -27,8 +27,8 @@ class EmployeeLeaveRequestsController extends Controller
      */
     public function index()
     {
-        $employeeLeaveRequests = $this->employeeLeaveRequests->paginate();
-
+       $employeeLeaveRequests = $this->employeeLeaveRequests->paginate();
+      
         return view('pages.employees-leave-request', compact('employeeLeaveRequests'));
     }
 
@@ -78,6 +78,7 @@ class EmployeeLeaveRequestsController extends Controller
 
         return redirect()->route('employees-leave-request')->with('status', 'Successfully created an employee leave request.');
     }
+
 
     /**
      * Display the specified resource.

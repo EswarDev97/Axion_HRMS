@@ -19,7 +19,7 @@
         @endif
         <form action="{{ route('employees-leave-request.store') }}" method="POST">
           @csrf
-          <input type="hidden" name="employee_id" value="{{ auth()->user()->employee->id }}">
+          <input type="hidden" name="employee_id" value="{{ optional(auth()->user()->employee)->id }}">
           <div class="mb-3">
             <div class="row">
               <div class="col-sm-12 col-lg-6">

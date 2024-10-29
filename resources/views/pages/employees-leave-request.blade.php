@@ -44,7 +44,13 @@
             @foreach ($employeeLeaveRequests as $leaveReq)
             <tr>
               <th scope="row">{{ $loop->iteration + $employeeLeaveRequests->firstItem() - 1 }}</th>
-              <td><a href="{{ route('employees-leave-request.show', ['employeeLeaveRequest' => $leaveReq->id]) }}">{{ $leaveReq->employee->name }}</a></td>
+              <td>
+                @if($leaveReq->employee)
+                  <a href="{{ route('employees-leave-request.show', ['employeeLeaveRequest' => $leaveReq->id]) }}">{{ $leaveReq->employee->name }}</a>
+                @else
+                  N/A
+                @endif
+              </td>
               <td>{{ $leaveReq->from }}</td>
               <td>{{ $leaveReq->to }}</td>
               <td>{{ $leaveReq->message }}</td>

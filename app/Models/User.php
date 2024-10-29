@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -53,7 +56,7 @@ class User extends Authenticatable
         return $this->hasOne(Employee::class);
     }
 
-    public function paginate($count = 10) 
+    public function paginate($count =25) 
     {
         return $this->with('role')->latest()->paginate($count);
     }
@@ -68,8 +71,8 @@ class User extends Authenticatable
         return $this->role->isAdmin();
     }
 
-    public function position()
+    public function can($ability, $arguments = [])
     {
-        return $this->belongsTo(Position::class);
+        return $this->hasPermissionTo($ability);
     }
 }
